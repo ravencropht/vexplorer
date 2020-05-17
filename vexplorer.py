@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import subprocess
+from os import environ
 
 
 def vault_get(vault_path):
@@ -47,6 +48,11 @@ print('Для перехода вверх введите up,UP или ..')
 print('---------------------------------------')
 
 while True:
+# Check Vault env variables
+    if 'VAULT_ADDR' not in environ or 'VAULT_TOKEN' not in environ:
+        print('Не заданы переменные VAULT_ADDR или VAULT_TOKEN')
+        break
+#
     try:
         print(vault_list(vault_path))
     except:
